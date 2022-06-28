@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const { findByIdAndUpdate } = require("../models/user");
 const User = require("../models/user");
 
 //UPDATE USER
@@ -47,11 +46,34 @@ router.delete('/:id', async (req,res) => {
 });
 
 //GET USER
-router.get('/:id', async (req,res) => {
+router.get('/', async (req,res) => {
+    const userId = req.query.userId;
+    const username = req.query.username;
     try{
-        const user = await User.findById(req.params.id);
-        const {password, updateAt, ...other} = user._doc
+        const user = userId ? await User.findById(userId) : await User.findOne({username: username});
+        const {password, updateAt, ...other} = user._doc;
         res.status(200).json(other);
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+});
+
+//GET FOLLOWINGS
+router.get("/followings/:userId", async (req, res) => { 
+    try{
+        const user = await User.findById(req.params.userId);
+        const followings = await Promise.all(
+            user.followings.map((followingsId) => {
+                return User.findById(followingsId);
+            })
+        );
+        let followingList = [];
+        followings.map((following) => {
+            const { _id, username, profilePicture } = following;
+            followingList.push({_id, username, profilePicture}); 
+        });
+        res.status(200).json(followingList);
     }
     catch(err){
         res.status(500).json(err);

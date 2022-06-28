@@ -17,6 +17,11 @@
     display: flex;
     align-items: center;
 }
+.postProfileLink{
+    display: flex; 
+    align-items: center;
+    margin-right: 10px;
+}
 .postProfileImage{
     width: 32px;
     height: 32px;
@@ -25,8 +30,8 @@
     margin-right: 15px;
 }
 .postUsername{
-    font-size: 14px;
-    margin: 0 10px;
+    font-size: 15px;
+    color: #000000;
 }
 .postDate{
     font-size: 12px;
@@ -34,6 +39,9 @@
 }
 .postCenter{
     margin: 20px 0;
+}
+.postText{
+    font-weight: 300;
 }
 .postImage{
     margin-top: 20px;

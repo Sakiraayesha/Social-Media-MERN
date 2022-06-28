@@ -31,6 +31,18 @@
     padding: 0;
     margin: 0;
 }
+.rightbarFollowButton{
+    margin: 30px 0 15px 0;
+    border: none;
+    background-color: #6495ed;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+}
 .rightbarInfo{
     margin-bottom: 30px;
 }
@@ -60,4 +72,7 @@
     height: 100px;
     border-radius: 5px;
     object-fit: cover;
+}
+.rightbarFollowingName{
+    color: #000000;
 }
