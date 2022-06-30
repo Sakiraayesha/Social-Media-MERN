@@ -80,6 +80,27 @@ router.get("/followings/:userId", async (req, res) => {
     }
 });
 
+//GET FOLLOWERS
+router.get("/followers/:userId", async (req, res) => { 
+    try{
+        const user = await User.findById(req.params.userId);
+        const followers = await Promise.all(
+            user.followers.map((followersId) => {
+                return User.findById(followersId);
+            })
+        );
+        let followerList = [];
+        followers.map((follower) => {
+            const { _id, username, profilePicture } = follower;
+            followerList.push({_id, username, profilePicture}); 
+        });
+        res.status(200).json(followerList);
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+});
+
 //FOLLOW USER
 router.put('/:id/follow', async (req,res) => {
     if(req.body.userId !== req.params.id){

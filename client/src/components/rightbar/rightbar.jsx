@@ -13,8 +13,8 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 function Rightbar({user}){
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [ followings, setFollowings ] = useState([]);
+    const [ followers, setFollowers ] = useState([]);
     const { user: currentUser, dispatch } = useContext(AuthContext);
-    const [ followed, setFollowed ] = useState(currentUser.followings.includes(user?._id)); 
     
     useEffect(() => {
         const getFollowings = async () => {
@@ -27,11 +27,24 @@ function Rightbar({user}){
             }
         }
         getFollowings();
-    },[user]);
+    },[user?._id]);
+
+    useEffect(() => {
+        const getFollowers = async () => {
+            try{
+                const followerList = await axios.get("/users/followers/" + user?._id);
+                setFollowers(followerList.data);
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+        getFollowers();
+    },[user?._id]);
 
     const handleClick = async () => {
         try{
-            if(followed){
+            if(currentUser.followings.includes(user?._id)){
                 await axios.put("/users/" + user?._id + "/unfollow", {
                     userId: currentUser._id,
                 });
@@ -43,7 +56,6 @@ function Rightbar({user}){
                 });
                 dispatch({ type: "FOLLOW", payload: user?._id });
             }
-            setFollowed(!followed);
         }
         catch(err){
             console.log(err);
@@ -75,8 +87,8 @@ function Rightbar({user}){
             <>
                 {(user.username !== currentUser.username) && (
                     <button className='rightbarFollowButton' onClick={handleClick}>
-                        {followed? <PersonRemoveIcon/> : <PersonAddIcon/>}
-                        {followed? "Unfollow" : "Follow"}
+                        {currentUser.followings.includes(user?._id)? <PersonRemoveIcon/> : <PersonAddIcon/>}
+                        {currentUser.followings.includes(user?._id)? "Unfollow" : "Follow"}
                     </button>
                 )}
                 <h4 className='rightbarTitle'>User information</h4>
@@ -101,21 +113,42 @@ function Rightbar({user}){
                                 ? "Single"
                                 : user.relationship ===  2
                                 ? "Married"
+                                : user.relationship ===  3
+                                ? "Complicated"
                                 : "-"
                             }
                             </span>
                     </div>
                 </div>
-                <h4 className='rightbarTitle'>Friends</h4>
+                <h4 className='rightbarTitle'>Following</h4>
                 <div className="rightbarFollowings">
-                    {followings.map((f) => (
+                    {
+                    followings.length ?
+                    followings.map((f) => (
                         <Link to={`/profile/${f.username}`} style={{textDecoration:"none"}} key = {f._id} >
                             <div className="rightbarFollowing">
-                                <img src={f.profilePicture? PF + f.profilePicture : PF + "profileimage/fallback.jpg"} alt="Profile Image" className="rightbarFollowingImg" />
+                                <img src={f.profilePicture? PF + "profileimage/" + f.profilePicture : PF + "profileimage/fallback.jpg"} alt="Profile Image" className="rightbarFollowingImg" />
                                 <span className="rightbarFollowingName">{f.username}</span>
                             </div>
                         </Link>
-                    ))}
+                    ))
+                    : <div className="rightbarNoneFollowing">{(user.username !== currentUser.username) ? "This user does not" : "You do not"} follow anyone yet.</div>
+                    }
+                </div>
+                <h4 className='rightbarTitle'>Followers</h4>
+                <div className="rightbarFollowings">
+                    {
+                    followers.length ?
+                    followers.map((f) => (
+                        <Link to={`/profile/${f.username}`} style={{textDecoration:"none"}} key = {f._id} >
+                            <div className="rightbarFollowing">
+                                <img src={f.profilePicture? PF + "profileimage/" + f.profilePicture : PF + "profileimage/fallback.jpg"} alt="Profile Image" className="rightbarFollowingImg" />
+                                <span className="rightbarFollowingName">{f.username}</span>
+                            </div>
+                        </Link>
+                    ))
+                    : <div className="rightbarNoneFollowing">{(user.username !== currentUser.username) ? "This user does not" : "You do not"}  have any followers yet.</div>
+                    }
                 </div>
             </>
         );

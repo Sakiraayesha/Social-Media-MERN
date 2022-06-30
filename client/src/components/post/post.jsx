@@ -48,7 +48,7 @@ function Post({post}){
                     <div className="postTopLeft">
                         <Link to={`/profile/${user.username}`} style={{textDecoration:"none"}}>
                             <div className='postProfileLink'>
-                                <img className='postProfileImage' src={user.profilePicture ? PF + user.profilePicture : PF + "profileimage/fallback.jpg"} alt='Profile Image'/>
+                                <img className='postProfileImage' src={user.profilePicture ? PF + "profileimage/" + user.profilePicture : PF + "profileimage/fallback.jpg"} alt='Profile Image'/>
                                 <span className='postUsername'>{user.username}</span>
                             </div>
                         </Link>

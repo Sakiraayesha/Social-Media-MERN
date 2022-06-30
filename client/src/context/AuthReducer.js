@@ -35,7 +35,36 @@ const AuthReducer = (state, action) => {
                       (following) => following !== action.payload
                     ),
                 },
-            };         
+            };
+        case "UPDATE_PROFILE_PICTURE":
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    profilePicture: action.payload,
+                },
+            }; 
+        case "UPDATE_ACC_SETTINGS":
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    username: action.payload.username,
+                    email: action.payload.email,
+                    password: action.payload.password,
+                },
+            }; 
+        case "UPDATE_USER_INFO":
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    bio: action.payload.bio,
+                    city: action.payload.city,
+                    from: action.payload.from,
+                    relationship: action.payload.relationship
+                },
+            };                           
         default:
         return state;    
     }

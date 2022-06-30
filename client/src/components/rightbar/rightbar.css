@@ -40,6 +40,8 @@
     padding: 5px 10px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    width: 120px;
     font-size: 16px;
     cursor: pointer;
 }
@@ -59,6 +61,7 @@
 .rightbarFollowings{
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 .rightbarFollowing{
     display: flex;
@@ -75,4 +78,8 @@
 }
 .rightbarFollowingName{
     color: #000000;
+}
+.rightbarNoneFollowing{
+    color: #797979;
+    font-size: 14px;
 }

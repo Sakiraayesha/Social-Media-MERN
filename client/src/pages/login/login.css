@@ -61,8 +61,14 @@
     text-align: center;
     color: #1E90FF;
 }
-.loginRegisterButton{
+.loginButtonLink{
+    text-decoration: none;
     width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.loginRegisterButton{
+    width: 100%;
     height: 50px;
     border-radius: 10px;
     border: none;

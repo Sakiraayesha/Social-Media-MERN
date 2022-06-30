@@ -21,3 +21,18 @@ export const Unfollow = (userId) => ({
     type: "UNFOLLOW",
     payload: userId,
 });
+
+export const UpdateProfilePicture = (filename) => ({
+    type: "UPDATE_PROFILE_PICTURE",
+    payload: filename,
+});
+
+export const UpdateAccountSettings = (user) => ({
+    type: "UPDATE_ACC_SETTINGS",
+    payload: user
+});
+
+export const UpdateUserInfo = (user) => ({
+    type: "UPDATE_USER_INFO",
+    payload: user
+});

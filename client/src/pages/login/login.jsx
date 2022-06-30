@@ -4,7 +4,7 @@ import {loginCall} from "../../apiCalls";
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from "@material-ui/core";
-
+import {Link} from 'react-router-dom';
 
 function Login(){
     const email = useRef();
@@ -33,9 +33,11 @@ function Login(){
                             {isFetching? (<CircularProgress color="inherit" size="20px" /> ) : ("Log In")}
                         </button>
                         <span className="loginForgot">Forgot password?</span>
-                        <button className="loginRegisterButton">
-                            {isFetching? (<CircularProgress color="inherit" size="20px" /> ) : ("Create a new account")}
-                        </button>
+                        <Link to="/register" className="loginButtonLink">
+                            <button className="loginRegisterButton">
+                                {isFetching? (<CircularProgress color="inherit" size="20px" /> ) : ("Create a new account")}
+                            </button>
+                        </Link>
                     </form>
                 </div>
             </div>

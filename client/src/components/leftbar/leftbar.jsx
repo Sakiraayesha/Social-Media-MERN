@@ -1,4 +1,5 @@
 import './leftbar.css';
+import {Users} from '../../testData';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import ChatIcon from '@mui/icons-material/Chat';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
@@ -7,19 +8,31 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import HelpIcon from '@mui/icons-material/Help';
 import WorkIcon from '@mui/icons-material/Work';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import SchoolIcon from '@mui/icons-material/School';
-import {Users} from '../../testData';
 import CloseFriend from '../closeFriend/closeFriend';
+import SettingsIcon from '@mui/icons-material/Settings';
+import {Link} from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 function Leftbar(){
+    const { user } = useContext(AuthContext);
+
     return(
         <div className='leftbar'>
             <div className='leftbarWrapper'>
                 <ul className='leftbarList'>
-                    <li className='leftbarListItem'>
-                        <RssFeedIcon className='leftbarListItemIcon'/>
-                        <span className='leftbarListItemText'>Feed</span>
-                    </li>
+                    <Link className='leftbarListItemLink' to={`/settings/${user.username}`}>
+                        <li className='leftbarListItem'>
+                            <SettingsIcon className='leftbarListItemIcon'/>
+                            <span className='leftbarListItemText'>Settings</span>
+                        </li>
+                    </Link>
+                    <Link className='leftbarListItemLink' to={`/`}>
+                        <li className='leftbarListItem'>
+                            <RssFeedIcon className='leftbarListItemIcon'/>
+                            <span className='leftbarListItemText'>Feed</span>
+                        </li>
+                    </Link>
                     <li className='leftbarListItem'>
                         <ChatIcon className='leftbarListItemIcon'/>
                         <span className='leftbarListItemText'>Chats</span>
@@ -47,10 +60,6 @@ function Leftbar(){
                     <li className='leftbarListItem'>
                         <CalendarMonthIcon className='leftbarListItemIcon'/>
                         <span className='leftbarListItemText'>Events</span>
-                    </li>
-                    <li className='leftbarListItem'>
-                        <SchoolIcon className='leftbarListItemIcon'/>
-                        <span className='leftbarListItemText'>Courses</span>
                     </li>
                 </ul>
                 <button className='leftbarButton'>Show More</button>

@@ -25,8 +25,12 @@ function Header(){
             </div>
             <div className="headerRight">
                 <div className="headerLinks">
-                    <span className="headerLink">Home</span>
-                    <span className="headerLink">Profile</span>
+                    <Link to="/" style={{textDecoration: "none"}}>
+                        <span className="headerLink">Home</span>
+                    </Link>
+                    <Link to={`/profile/${user.username}`} style={{textDecoration: "none"}}>
+                        <span className="headerLink">Profile</span>
+                    </Link>
                 </div>
                 <div className="headerIcons">
                     <div className="headerIconItem">
@@ -42,9 +46,9 @@ function Header(){
                         <span className="headerIconBadge">1</span>
                     </div>
                 </div>
-                <Link to={`profile/${user.username}`}>
+                <Link to={`/profile/${user.username}`}>
                     <img 
-                        src={user.profilePicture? PF + user.profilePicture : PF + 'profileimage/fallback.jpg'} 
+                        src={user.profilePicture? PF + 'profileimage/' + user.profilePicture : PF + 'profileimage/fallback.jpg'} 
                         alt="Profile Image" 
                         className="headerImage"
                     />

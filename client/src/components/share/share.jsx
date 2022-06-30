@@ -50,7 +50,7 @@ function Share(){
         <div className='share'>
             <div className="shareWrapper">
                 <div className="shareTop">
-                    <img className='shareProfileImage' src={user.profilePicture? PF + user.profilePicture : PF + "profileimage/fallback.jpg"} alt='Profile Image'/>
+                    <img className='shareProfileImage' src={user.profilePicture? PF + "profileimage/" + user.profilePicture : PF + "profileimage/fallback.jpg"} alt='Profile Image'/>
                     <input placeholder={"What's on your mind " + user.username + "?"} className='shareInput' ref={caption}/>
                 </div>
                 <hr className='shareHr'/>
