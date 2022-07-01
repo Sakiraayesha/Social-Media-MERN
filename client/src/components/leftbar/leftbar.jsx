@@ -21,7 +21,7 @@ function Leftbar(){
         <div className='leftbar'>
             <div className='leftbarWrapper'>
                 <ul className='leftbarList'>
-                    <Link className='leftbarListItemLink' to={`/settings/${user.username}`}>
+                    <Link className='leftbarListItemLink' to={`/settings`}>
                         <li className='leftbarListItem'>
                             <SettingsIcon className='leftbarListItemIcon'/>
                             <span className='leftbarListItemText'>Settings</span>
@@ -33,10 +33,12 @@ function Leftbar(){
                             <span className='leftbarListItemText'>Feed</span>
                         </li>
                     </Link>
-                    <li className='leftbarListItem'>
-                        <ChatIcon className='leftbarListItemIcon'/>
-                        <span className='leftbarListItemText'>Chats</span>
-                    </li>
+                    <Link className='leftbarListItemLink' to={`/messenger`}>
+                        <li className='leftbarListItem'>
+                            <ChatIcon className='leftbarListItemIcon'/>
+                            <span className='leftbarListItemText'>Chats</span>
+                        </li>
+                    </Link>
                     <li className='leftbarListItem'>
                         <VideoLibraryIcon className='leftbarListItemIcon'/>
                         <span className='leftbarListItemText'>Videos</span>
