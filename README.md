@@ -1,3 +1,11 @@
 # SocialMedia-MERN
 
-A MERN stack based Social Media application with features like Sign Up, Log In, Upload Images/Posts, React to posts, Follow/Unfollow, Update account, Real time chat and more. 
+A MERN stack based Social Media application with newsfeed, profile page, messaging tool and more.
+
+Included Features-
+# Sign Up & Sign In
+# Upload Image/Status
+# React to posts
+# Follow/Unfollow users
+# Update account/profile settings 
+# Real time chat
